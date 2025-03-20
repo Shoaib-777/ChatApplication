@@ -9,6 +9,7 @@ export const useGroupStore = create((set,get)=>({
     GroupSelectedId:null,
     LoadingGroupsChats:false,
     GroupSelectedData:[],
+    SendingMessage:false,
     GroupUsersProfile:[],
     getAvailableUser:async(userId)=>{
         try {
@@ -38,7 +39,7 @@ export const useGroupStore = create((set,get)=>({
         set({GroupSelectedId:id})
     },
     sendGroupMessage:async(message,DownloadUrl,GroupSelectedId,authUser)=>{
-        
+        set({SendingMessage:true})
         try {
             const res = await axiosInstance.post(`/groups/send`,{message,image:DownloadUrl,groupId:GroupSelectedId,senderId:authUser})
             // console.log("message send sucessfully!",res.data)
@@ -53,6 +54,8 @@ export const useGroupStore = create((set,get)=>({
             });
         } catch (error) {
             console.log("error sending group message",error)
+        }finally{
+            set({SendingMessage:false})
         }
     },
     GetGroupSelectedData:async(groupId)=>{

@@ -60,9 +60,8 @@ io.on("connection", async(socket) => {
 
   socket.on("disconnect", async() => {
     // console.log("A user disconnected", socket.id);
-
-    delete userSocketMap[userId]
     await User.findByIdAndUpdate(userId,{status:"offline",lastSeen:Date.now(),new:true});
+    delete userSocketMap[userId]
 
     // Remove user from all groups they were in
     Object.keys(groupSocketMap).forEach(groupId => {

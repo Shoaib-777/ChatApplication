@@ -1,10 +1,11 @@
-import { Image, Send, XCircle } from 'lucide-react';
+import { Image, LoaderCircle, Send, XCircle } from 'lucide-react';
 import React from 'react';
 import { useThemeStore } from '../store/useThemeStore';
+import { useGroupStore } from '../store/useGroupStore';
 
 const MessageInputGroup = ({message,setMessage,image,setImage,handleImageUpload,handleCancel,handleSubmit}) => {
   const {theme}=useThemeStore()
-
+const {SendingMessage} =useGroupStore()
   return (
     <>
       {/* Image Preview */}
@@ -54,8 +55,12 @@ const MessageInputGroup = ({message,setMessage,image,setImage,handleImageUpload,
 
             {/* Send Button */}
             <div className='px-2 py-1 flex justify-center items-center'>
-              <button  disabled={!message}>
-                <Send className={`size-6 ${message ?  "text-green-500":"text-gray-500 hover:cursor-not-allowed"} `} />
+              <button  disabled={!message || SendingMessage} className={`${SendingMessage && 'cursor-not-allowed'}`}>
+                {SendingMessage ?(
+                  <LoaderCircle className='size-6' />
+                ):(
+                  <Send className={`size-6 ${message ?  "text-green-500":"text-gray-500 hover:cursor-not-allowed"} `} />
+                )}
               </button>
             </div>
           </div>

@@ -471,6 +471,7 @@ const MessageContainerGroup = ({ message, setMessage, image, setImage, handleIma
     GroupSelectedData.map((message, i) => {
       // Find the sender details from users array
       const sender = GroupUsersProfile?.users?.find(user => user._id === message.senderId);
+      console.log("iam sender",sender)
 
       return (
         <div
@@ -489,7 +490,7 @@ const MessageContainerGroup = ({ message, setMessage, image, setImage, handleIma
 
           {/* Sender Name */}
           <div className="chat-header mb-1">
-            <span className="font-semibold">{sender?.name || "Unknown User"}</span>
+            <span className="font-semibold">{sender?._id === authUser ? "you" : sender?.name || "Unknown User"}</span>
           </div>
 
           {/* Message Content */}

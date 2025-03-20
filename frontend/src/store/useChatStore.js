@@ -4,6 +4,7 @@ import { useGetCookies } from "./useGetCookies";
 
 export const useChatStore = create((set, get) => ({
     Messages: [],
+    LoadingSendingMessage:false,
     UsersFriends: [],
     GetAllUsers: [],
     UsersFriendRequests:[],
@@ -15,7 +16,6 @@ export const useChatStore = create((set, get) => ({
     UserProfile: false,
     SelectedUser: null,
 
-    // todo user id is : 679f4fc5b9f8bcb06106f595
     getUsersFriends: async (userId) => {
         try {
             set({ UsersFriendsLoading: true })
@@ -29,6 +29,7 @@ export const useChatStore = create((set, get) => ({
     },
 
     sendMessage: async (authUser,selectedUser,texts,imagePreview) => {
+        set({LoadingSendingMessage:true})
         try {
             const res = await axiosInstance.post('/user/message', {
                 senderId: authUser,
@@ -39,6 +40,8 @@ export const useChatStore = create((set, get) => ({
             set((state) => ({ Messages: [...(state.Messages || []), res.data.newMssg] }));            
         } catch (error) {
             console.log("error sending message", error)
+        }finally{
+            set({LoadingSendingMessage:false})
         }
     },
     upDataSelectedUser :(userId)=>{
