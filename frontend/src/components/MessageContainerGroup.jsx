@@ -471,8 +471,6 @@ const MessageContainerGroup = ({ message, setMessage, image, setImage, handleIma
     GroupSelectedData.map((message, i) => {
       // Find the sender details from users array
       const sender = GroupUsersProfile?.users?.find(user => user._id === message.senderId);
-      console.log("iam sender",sender)
-
       return (
         <div
           key={message._id || i}
