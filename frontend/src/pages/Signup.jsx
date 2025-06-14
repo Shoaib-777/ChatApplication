@@ -135,7 +135,7 @@ const Signup = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center items-center w-full mx-auto h-[calc(100vh-65px)] py-2 gap-x-4 ">
+      <div className="flex justify-center items-center w-full mx-auto min-h-[calc(100vh-65px)] py-2 gap-x-4 ">
         <div className="border border-gray-300 shadow-xl w-full h-full overflow-y-auto py-2  lg:w-1/2 mx-4 max-w-lg">
           <form onSubmit={handleSubmit}>
             <div className="text-center mb-4">
