@@ -64,7 +64,7 @@ export const VerifyOTP = async (req, res) => {
         res.clearCookie("otp");
         res.cookie("otp_sucess", token, {
             httpOnly: true,
-            secure: NODE_ENV,  // Use secure in production only
+            secure: process.env.NODE_ENV,  // Use secure in production only
             maxAge: 5 * 60 * 1000, // 5 minutes
             sameSite: "strict"
         });
